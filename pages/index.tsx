@@ -15,11 +15,14 @@ import {
 import { isAddress } from 'ethers';
 import { Network } from 'alchemy-sdk';
 
+import { useIsMobile } from '../shared/utils';
+
 const HomePage = () => {
   const [address, setAddress] = useState('');
   const [network, setNetwork] = useState(Network.ETH_MAINNET);
   const [error, setError] = useState('');
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
@@ -41,12 +44,12 @@ const HomePage = () => {
   };
 
   return (
-    <Box textAlign="center" mt={5}>
-      <Typography variant="h4">Welcome to the Blockchain Explorer</Typography>
+    <Box textAlign="center" mt={isMobile ? 3 : 5} px={isMobile ? 2 : 0}>
+      <Typography variant={isMobile ? 'h5' : 'h4'}>Welcome to the Blockchain Explorer</Typography>
       <Typography variant="body1" mt={2}>
         This is a simple web application to explore blockchain transactions and their details.
       </Typography>
-      <Box mt={4}>
+      <Box mt={4} maxWidth={isMobile ? '100%' : '600px'} mx="auto">
         <FormControl fullWidth>
           <InputLabel>Network</InputLabel>
           <Select value={network} onChange={handleNetworkChange}>

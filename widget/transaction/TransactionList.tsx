@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/router';
 import { Network } from 'alchemy-sdk';
 
-import { formatDate, formatAmount } from '../../shared/utils';
+import { formatDate, formatAmount, shortenHash } from '../../shared/utils';
 import { Transaction } from '../../shared/types';
 
 interface TransactionListProps {
@@ -83,7 +83,7 @@ export function TransactionList({
           {sortedTransactions.map((tx) => (
             <TableRow key={tx.id}>
               <TableCell>{formatDate(tx.timestamp)}</TableCell>
-              <TableCell>{tx.hash}</TableCell>
+              <TableCell>{shortenHash(tx.hash)}</TableCell>
               <TableCell>{formatAmount(tx.amount)}</TableCell>
               <TableCell>
                 <Link onClick={() => handleLinkClick(tx.hash)} underline="hover">

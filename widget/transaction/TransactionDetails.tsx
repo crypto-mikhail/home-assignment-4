@@ -1,6 +1,8 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Network } from 'alchemy-sdk';
 
+import { shortenHash } from '../../shared/utils';
+
 interface TransactionDetailsProps {
   network: Network;
   hash: string;
@@ -25,11 +27,11 @@ export function TransactionDetails({
   const blockScanLink = `https://${network === Network.ETH_MAINNET ? 'etherscan.io' : 'polygonscan.com'}/tx/${hash}`;
 
   return (
-    <Box>
+    <Box sx={{ width: '100%', overflowX: 'auto' }}>
       <Typography>
         Hash:{' '}
         <Link href={blockScanLink} target="_blank" underline="hover">
-          {hash}
+          {shortenHash(hash)}
         </Link>
       </Typography>
       <Typography>From: {from}</Typography>
